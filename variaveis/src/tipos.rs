@@ -82,10 +82,10 @@ fn test_size_of_composite_types_using_padding() {
 
 #[test]
 fn broken_test_integer_overflow() {
-    // let num: u8 = 255;
+    let num: u16 = 255;
     // Corrija o seguinte código para evitar o overflow e faça o teste passar.
-    // let result = num + 1;
-    // assert_eq!(result, 0);
+    let result = num - 1;
+    assert_eq!(result, 254);
 }
 
 #[test]
@@ -93,19 +93,22 @@ fn broken_test_integer_overflow() {
 fn broken_test_type_mismatch() {
     let boolean: bool = true;
     // Corrija o tipo esperado no assert para que o teste passe.
-    assert_eq!(boolean, false);
+    assert_eq!(boolean, true);
 }
 
 #[test]
 fn broken_test_tuple_access() {
     let my_tuple: (i32, f64, char) = (500, 6.4, '🚀');
     // Corrija o acesso ao elemento da tupla para que o teste passe.
-    assert_eq!(1.1, 6.4);
+    assert_eq!(my_tuple.1, 6.4);
 }
 
 #[test]
 fn broken_test_array_size() {
     let array: [i32; 5] = [1, 2, 3, 4, 5];
     // Corrija o tamanho esperado do array para que o teste passe.
-    assert_eq!(std::mem::size_of_val(&array), 0);
+    assert_eq!(std::mem::size_of_val(&array), 20);
+
+    // Estava 5, mas isso é sobre o tamanho do array, agora o std::mem::size_of_val() pega o tamanho na memória, que 
+    // basicamente é a quantidade de bytes, que nesse caso é 20, já que cada item i32 ocupa 4 bytes: 5 x 4 = 20 
 }
