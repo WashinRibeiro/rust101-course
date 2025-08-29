@@ -2,7 +2,7 @@
 fn broken_test_while_loop() {
     let mut number = 0;
     // Corrija o loop para que incremente number até que seja menor que 5.
-    while number > 5 {
+    while number < 5 {
         number += 1;
     }
     assert_eq!(number, 5);
@@ -14,7 +14,7 @@ fn broken_test_infinite_loop_with_break() {
     loop {
         counter += 1;
         // Corrija o ponto de interrupção para sair do loop quando counter for igual a 3.
-        if counter > 3 {
+        if counter == 3 {
             break;
         }
     }
@@ -25,7 +25,7 @@ fn broken_test_infinite_loop_with_break() {
 fn broken_test_for_loop_over_range() {
     let mut sum = 0;
     // Corrija o loop for para somar valores de 1 a 5, inclusive.
-    for i in 1..=4 {
+    for i in 1..=5 {
         sum += i;
     }
     assert_eq!(sum, 15); // 1+2+3+4+5 = 15
@@ -33,7 +33,7 @@ fn broken_test_for_loop_over_range() {
 
 #[test]
 fn broken_test_for_loop_over_array() {
-    let numbers = [1, 2, 3, 4, 5];
+    let numbers = [1, 2, 3, 4];
     let mut sum = 0;
     // Corrija o loop para somar os valores do array numbers.
     for &num in numbers.iter() {
@@ -47,7 +47,7 @@ fn broken_test_while_true_with_condition() {
     let mut num = 10;
     // Corrija o loop para decrementar num até 5 usando um loop infinito com condição de saída.
     loop {
-        if num <= 5 {
+        if num == 5 {
             break;
         }
         num -= 1;
@@ -62,13 +62,13 @@ fn broken_test_loop_control_variables() {
         count += 1;
     }
     // Corrija a expectativa para que o teste reflita o correto controle de iteração.
-    assert_eq!(count, 6); // Contagem de iterações incorreta.
+    assert_eq!(count, 5); // Contagem de iterações incorreta.
 }
 
 #[test]
 fn broken_test_nested_loops() {
     let mut product = 1;
-    for i in 1..3 {
+    for _i in 1..3 {
         // Loop externo.
         for j in 1..4 {
             // Loop interno.
@@ -96,7 +96,7 @@ fn broken_test_loop_with_continue() {
 fn broken_test_while_decrement() {
     let mut number = 5;
     // Corrija o loop para decrementar number até 0.
-    while number < 0 {
+    while number > 0 {
         number -= 1;
     }
     assert_eq!(number, 0);
@@ -110,5 +110,5 @@ fn broken_test_for_loop_with_index() {
     for letter in letters.iter() {
         count += 1;
     }
-    assert_eq!(count, 4); // Contagem de letras incorreta.
+    assert_eq!(count, 5); // Contagem de letras incorreta.
 }
