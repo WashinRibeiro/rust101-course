@@ -5,9 +5,10 @@ fn broken_test_function_with_parameters() {
     assert_eq!(result, 4);
 
     // Função para correção:
-    // fn add_two(x: i32) -> i32 {
-    //    // Correção necessária aqui.
-    // }
+    fn add_two(x: i32) -> i32 {
+        // Correção necessária aqui.
+        x + 2
+    }
 }
 
 #[test]
@@ -17,9 +18,9 @@ fn broken_test_function_return() {
     assert_eq!(empty_string, "");
 
     // Função para correção:
-    // fn create_empty_string() -> String {
-    //    // Correção necessária aqui.
-    // }
+    fn create_empty_string() -> String {
+        "".to_string()
+    }
 }
 
 #[test]
@@ -30,10 +31,11 @@ fn broken_test_scope_within_functions() {
     assert_eq!(result, 200);
 
     // Função para correção:
-    // fn multiply_by_two(x: i32) -> i32 {
-    //    let inner_var = x * 2;
-    //    // Correção necessária aqui.
-    // }
+    fn multiply_by_two(x: i32) -> i32 {
+       let inner_var = x * 2;
+       inner_var
+       // Correção necessária aqui.
+    }
 }
 
 #[test]
@@ -43,9 +45,10 @@ fn broken_test_function_without_return_type() {
     assert_eq!(greeting, "Hello!");
 
     // Função para correção:
-    // fn say_hello() {
-    //    // Correção necessária aqui.
-    // }
+    fn say_hello() -> String {
+        "Hello!".to_string()
+       // Correção necessária aqui.
+    }
 }
 
 #[test]
@@ -56,7 +59,8 @@ fn broken_test_passing_reference_to_function() {
     assert_eq!(value, 11);
 
     // Função para correção:
-    // fn increase_by_one(x: &mut i32) {
-    //    // Correção necessária aqui.
-    // }
+    fn increase_by_one(x: &mut i32) {
+        *x += 1;
+       // Correção necessária aqui.
+    }
 }
