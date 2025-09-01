@@ -174,3 +174,79 @@ No exemplo acima, eu defini um `enum` chamado `Order`, que representa diferentes
 Além disso, usei a anotação `#[derive(Debug)]` para permitir que o `enum` seja impresso facilmente no console usando macros como `dbg!`, o que facilita a depuração.
 
 No próximo código, criei a função `get_number`, que retorna um `Option<u8>`. O tipo `Option` é um enum padrão do Rust que representa a possibilidade de ausência de valor: retorna `Some(x)` se o número for menor que 10, ou `None` caso contrário. Isso obriga o tratamento explícito de casos onde pode não haver valor, evitando erros comuns de acesso a dados inexistentes.
+
+---
+
+## Patters Match
+O "Pattern Match" (ou simplesmente "match") em Rust é uma ferramenta poderosa para comparar e destrinchar valores, especialmente enums e tipos opcionais. Ele permite que você escreva código que analisa diferentes possibilidades de um valor, executando ações específicas para cada caso.
+
+O match funciona como um "switch" mais inteligente, mas com muito mais poder: ele pode extrair dados, combinar múltiplos padrões e garantir que todos os casos sejam tratados, tornando o código mais seguro e legível.
+
+Por exemplo, ao trabalhar com um enum ou um Option, você pode usar o match para decidir o que fazer dependendo do valor:
+
+```rust
+let resultado = Some(10);
+
+match resultado {
+    Some(valor) => println!("O valor é {}", valor),
+    None => println!("Não há valor"),
+}
+```
+
+No exemplo acima, o match verifica se o resultado é `Some` ou `None` e executa o código apropriado para cada caso.
+
+**O pattern match é essencial em Rust para:**
+- Tratar diferentes variantes de enums
+- Lidar com valores opcionais (`Option`)
+- Garantir que todos os casos possíveis sejam cobertos
+- Escrever código mais seguro, claro e idiomático
+
+Em resumo, o match é uma das principais formas de controle de fluxo em Rust, permitindo que você escreva lógica robusta e sem surpresas!
+
+...
+
+O código abaixo, mostra como usar `enums` e `pattern match` para tratar diferentes resultados de uma operação em Rust.
+
+```rust
+use std::{fmt::{self, Display, Formatter}, u8};
+
+enum Result {
+    Ok(u8),
+    Err(String),
+}
+
+impl Display for Result {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        match self {
+            Result::Ok(number) => write!(f, "Funcionou: {}", number),
+            Result::Err(msg) => write!(f, "Erro: {}", msg),
+        }
+    }
+}
+
+fn half_item(item: u8) -> Result {
+    if item % 2 == 0 {
+        Result::Ok(item / 2)
+    } else {
+        Result::Err(format!("O item {} não pode ser dividido ao meio", item))
+    }
+}
+
+fn main() {
+    let result1: Result = half_item(9);
+    let result2: Result = half_item(12);
+    
+    println!("{}", result1);
+    println!("{}", result2);
+}
+```
+
+Primeiro, eu defini um enum chamado `Result`, que pode ser `Ok(u8)` para indicar sucesso com um valor, ou `Err(String)` para indicar erro com uma mensagem. Depois, implementei o trait `Display` para o enum, usando o `match` para decidir como formatar cada variante: se for `Ok`, imprime o valor; se for `Err`, imprime a mensagem de erro.
+
+A função `half_item` recebe um número e tenta dividir por 2. Se o número for par, retorna `Result::Ok` com o resultado. Se for ímpar, retorna `Result::Err` com uma mensagem explicando o erro.
+
+No main, no result1 chamo `half_item(9)` e imprimo o resultado. Como 9 é ímpar, o programa mostra:
+Erro: O item 9 não pode ser dividido ao meio;
+
+Já no result2, como 12 é par, imprimo:
+Funcionou: 6
