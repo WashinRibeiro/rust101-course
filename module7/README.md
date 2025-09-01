@@ -50,4 +50,99 @@ Structs são fundamentais em Rust para modelar entidades do mundo real, promover
 
 ---
 
-#
+## Traits
+Traits em Rust são similares a "interfaces" em outras linguagens. Eles definem um conjunto de métodos que tipos podem implementar. Ou seja, um trait descreve um comportamento que pode ser compartilhado entre diferentes structs ou enums. Se um tipo implementa um trait, ele precisa fornecer uma implementação para os métodos definidos nesse trait.
+
+Traits ajudam a garantir que diferentes tipos possam ser usados de forma intercambiável, desde que implementem o mesmo conjunto de comportamentos.
+
+... 
+
+Aqui criamos o trait `Comer`, que exige que qualquer tipo que o implemente forneça o método comendo, que recebe uma referência à instância (`&self`) e retorna um `bool`.
+
+**Definição do Trait**
+```rust
+trait Comer {
+    fn comendo(&self) -> bool;
+}
+```
+
+Criamos duas structs: Car e People. Cada uma representa uma entidade diferente.
+
+
+```rust
+struct Car {
+    name: String,
+    year: u16
+}
+
+struct People {
+    name: String,
+    age: u8
+}
+```
+
+**Implementação do Trait**
+
+Aqui, estamos dizendo que `People` implementa o trait `Comer`. Ou seja, pessoas podem "comer", então você fornece uma implementação para o método `comendo`, que sempre retorna `true`.
+
+Note que você não implementou `Comer` para `Car`, pois faz sentido: carros não comem.
+
+```rust
+impl Comer for People {
+    fn comendo(&self) -> bool {
+        true
+    }   
+}
+```
+
+Na main, criamos uma instância de `People` e chamamos o método `comendo()`, que retorna `true` e imprime isso.
+
+```rust
+fn main() {
+    let p: People = People {
+        name: "Joaquim".to_string(),
+        age: 6
+    };
+
+    println!("{}", p.comendo())
+}
+```
+
+Se precisarmos dar um `println!()` no `p` que foi criado, vamos ter o erro:
+```bash
+error[E0277]: `People` doesn't implement `std::fmt::Display`
+  --> src\main.rs:37:20
+   |
+37 |     println!("{}", p);
+   |               --   ^ `People` cannot be formatted with the default formatter
+   |               |
+   |               required by this formatting parameter
+   |
+   = help: the trait `std::fmt::Display` is not implemented for `People`
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+   = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more 
+info)
+```
+
+Esse erro acontece porque o println! com {} exige que o tipo implemente o trait Display.
+
+Por padrão, o Rust não sabe como transformar a sua struct (People) em uma String legível. Ele só sabe imprimir tipos básicos (como i32, String, etc.) que já implementam Display.
+
+O trait Display define justamente como um tipo deve ser convertido para texto “bonito” e legível para humanos. Quando você implementa esse trait, está dizendo explicitamente ao compilador como formatar a struct quando alguém usar {} em macros como println!.
+
+**Solução:**
+```rust
+// Importação
+use std::fmt::{Display, Formatter, Result};
+
+// Implementação
+impl Display for People {
+    fn fmt(&self, f: &mut Formatter) -> Result<> {
+        write!(f, "Nome: {}, Idade: {}", self.name, self.age)
+    }
+}
+```
+
+**Resumindo:**
+- O erro ocorre porque o compilador não sabe imprimir sua struct.
+- O trait Display fornece o contrato para ensinar o compilador a fazer isso.
