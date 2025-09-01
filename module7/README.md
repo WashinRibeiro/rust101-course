@@ -146,3 +146,31 @@ impl Display for People {
 **Resumindo:**
 - O erro ocorre porque o compilador não sabe imprimir sua struct.
 - O trait Display fornece o contrato para ensinar o compilador a fazer isso.
+
+---
+
+## Enums
+Enums, ou "enumerations", são tipos especiais em Rust que permitem definir um conjunto de valores possíveis para uma variável. Eles são úteis para representar estados, opções ou categorias distintas dentro do seu programa. Com enums, você pode criar tipos que só aceitam valores previamente definidos, tornando o código mais seguro e fácil de entender.
+
+Por exemplo, um enum pode ser usado para representar o estado de uma conexão (Conectado, Desconectado, Em Espera) ou o resultado de uma operação (Sucesso, Erro). Além disso, enums em Rust podem armazenar dados associados a cada variante, tornando-os ainda mais poderosos e flexíveis para modelar situações do mundo real.
+
+```rust
+#[derive(Debug)]
+
+enum Order {
+    OrderDone,
+    PaymentDone,
+    OrderSent,
+    OrderDelivery
+}
+
+fn main() {
+    dbg!(Order::OrderDelivery);
+}
+```
+
+No exemplo acima, eu defini um `enum` chamado `Order`, que representa diferentes estados de um pedido: **OrderDone**, **PaymentDone**, **OrderSent** e **OrderDelivery**. Enums são úteis para modelar situações onde uma variável pode assumir apenas um valor dentre várias opções pré-definidas, tornando o código mais seguro e legível.
+
+Além disso, usei a anotação `#[derive(Debug)]` para permitir que o `enum` seja impresso facilmente no console usando macros como `dbg!`, o que facilita a depuração.
+
+No próximo código, criei a função `get_number`, que retorna um `Option<u8>`. O tipo `Option` é um enum padrão do Rust que representa a possibilidade de ausência de valor: retorna `Some(x)` se o número for menor que 10, ou `None` caso contrário. Isso obriga o tratamento explícito de casos onde pode não haver valor, evitando erros comuns de acesso a dados inexistentes.
