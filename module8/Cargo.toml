@@ -1,0 +1,12 @@
+[package]
+name = "calc_near_x_module8"
+version = "0.1.0"
+edition = "2024"
+description = "Simple lib for leard proposal"
+authors = ["Washington Ribeiro <washinuchiha@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/WashinRibeiro/rust101-course"
+keywords = ["learn"]
+
+[dependencies]
