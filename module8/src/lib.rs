@@ -4,7 +4,7 @@ pub mod calc_with_1 {
     ///
     /// # exemplo
     /// ```rust
-    /// use calc_near_x_module8::calc_with_1::sum_plus_one;
+    /// use calc_nearx_module8::calc_with_1::sum_plus_one;
     ///
     /// assert_eq!(4, sum_plus_one(1, 2));
     /// assert_eq!(42, sum_plus_one(41, 0));
@@ -20,7 +20,7 @@ pub mod calc_with_1 {
     ///
     /// # exemplo
     /// ```rust
-    /// use calc_near_x_module8::calc_with_1::sub_less_one;
+    /// use calc_nearx_module8::calc_with_1::sub_less_one;
     ///
     /// assert_eq!(40, sub_less_one(41, 0));
     /// assert_eq!(0, sub_less_one(6, 6));

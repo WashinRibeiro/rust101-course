@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "calc_near_x_module8"
+name = "calc_nearx_module8"
 version = "0.1.0"

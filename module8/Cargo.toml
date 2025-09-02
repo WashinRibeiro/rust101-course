@@ -1,5 +1,5 @@
 [package]
-name = "calc_near_x_module8"
+name = "calc_nearx_module8"
 version = "0.1.0"
 edition = "2024"
 description = "Simple lib for leard proposal"
