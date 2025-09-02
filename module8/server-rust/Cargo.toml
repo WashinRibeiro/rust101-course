@@ -1,0 +1,9 @@
+[package]
+name = "server-rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+async-std = { version = "1.8.0", features = ["attributes"] }
+calc_nearx_module8 = "0.1.0"
+tide = "0.16.0"
